@@ -50,7 +50,8 @@ title_hide_list = ["private", "hidden", "secret"]
 
 default_user_icon = "https://kanka.io/images/defaults/user.svg"
 
-poll_interval_seconds = 30
+#poll_interval_seconds = 30
+poll_interval_seconds = int(os.getenv("POLL_INTERVAL"))
 error_count_max = 5
 force_sync = False
 ignore_same_id = True
