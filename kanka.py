@@ -47,7 +47,7 @@ def _work_with_response(resp):
 
 
 def _url(path):
-    return 'https://kanka.io/api/1.0/' + path
+    return 'https://api.kanka.io/1.0/' + path
 
 
 def _get(endpoint, params=None, sync=False):

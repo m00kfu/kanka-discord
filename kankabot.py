@@ -25,18 +25,25 @@ import time
 import os
 import traceback
 
-secret = "<YOUR KANKA API KEY HERE>"
+#secret = "<YOUR KANKA API KEY HERE>"
+secret = os.getenv("KANKA_TOKEN")
 
-discord_channel_log = "<LOG DISCORD CHANNEL WEBHOOK URL>"
-discord_channel_post = "<LOG DISCORD CHANNEL WEBHOOK URL>"
+#discord_channel_log = "<LOG DISCORD CHANNEL WEBHOOK URL>"
+#discord_channel_post = "<LOG DISCORD CHANNEL WEBHOOK URL>"
+discord_channel_log = os.getenv("DISCORD_LOG_WEBHOOK")
+discord_channel_post = os.getenv("DISCORD_CHANNEL_WEBHOOK")
+
 discord_enabled = True
 discord_log_enabled = True
 discord_name = "Kanka"
 discord_length = 180
 
 lang = "en"
-campaign_id = <YOUR CAMPAIGN ID HERE>
-campaign_name = "<YOUR CAMPAIGN NAME>"
+#campaign_id = <YOUR CAMPAIGN ID HERE>
+#campaign_name = "<YOUR CAMPAIGN NAME>"
+campaign_id = os.getenv("KANKA_CAMPAIGN_ID")
+campaign_name = os.getenv("KANKA_CAMPAIGN_NAME")
+
 ignore_before = "2020-12-01T12:00:00.000000Z"
 
 title_hide_list = ["private", "hidden", "secret"]
@@ -53,7 +60,7 @@ exclude_private = True
 exclude_template = True
 
 url = f"campaigns/{int(campaign_id)}/"
-full_url = f"https://kanka.io/{lang}/campaign/{int(campaign_id)}/"
+full_url = f"https://app.kanka.io/w/{int(campaign_id)}/"
 last_id = -1
 users = []
 latest_update = ""
@@ -213,9 +220,12 @@ def poll_updates():
         users = fetch_users()
       if user_id in users:
         user_name = users[user_id]["name"]
-        user_icon = users[user_id]["avatar"]
-        if len(user_icon) < 1 or user_icon.endswith("user.svg"):
-          user_icon = default_user_icon
+#        user_icon = users[user_id].["avatar"]
+#        if len(user_icon) < 1 or user_icon.endswith("user.svg"):
+#          user_icon = default_user_icon
+        user_icon = users[user_id].get("avatar", "")
+        if not isinstance(user_icon, str) or user_icon.endswith("user.svg"):
+           user_icon = default_user_icon
     
     embed = {}
     embed["title"] = name
