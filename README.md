@@ -41,6 +41,7 @@ Hope this is helpful to others, but no guarantees :)
         DISCORD_CHANNEL_WEBHOOK: https://discord.com/api/webhooks/...
         KANKA_CAMPAIGN_ID: "123456"
         KANKA_CAMPAIGN_NAME: "Name of your campaign"
+        POLL_INTERVAL: <number of seconds>
 
       volumes:
         - ./data/last_update.txt:/app/last_update.txt
