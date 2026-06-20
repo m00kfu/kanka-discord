@@ -28,6 +28,25 @@ Hope this is helpful to others, but no guarantees :)
    `@reboot sleep 60 && cd /opt/kanka-discord && /usr/bin/python3 /opt/kanka-discord/kankabot.py > /tmp/kanka.log 2>&1`  
    This starts the script 60 seconds after each reboot (waiting for the network being up) and logs the output to `/tmp/kanka.log` in case of errors
 
+## docker-compose.yml
+```
+  services:
+    kanka-discord:
+      build: .
+      restart: unless-stopped
+
+      environment:
+        KANKA_TOKEN: <your kanka API key>
+        DISCORD_LOG_WEBHOOK: https://discord.com/api/webhooks/...
+        DISCORD_CHANNEL_WEBHOOK: https://discord.com/api/webhooks/...
+        KANKA_CAMPAIGN_ID: "123456"
+        KANKA_CAMPAIGN_NAME: "Name of your campaign"
+
+      volumes:
+        - ./data/last_update.txt:/app/last_update.txt
+        - ./data/sync.json:/app/sync.json
+```
+
 ## Features
 - Pretty Discord embed formatting
 - Uses user names, colors, categories and avatars from Kanka.io
